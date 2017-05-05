@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nspro;
+package modified;
+
+import nspro.BayesSpamFilter;
+import nspro.Performance;
 
 /**
  *
