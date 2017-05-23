@@ -5,6 +5,8 @@
  */
 package nspro;
 
+import modified.EmailEvaluation;
+
 /**
  *
  * @author gezu
@@ -40,7 +42,12 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jToggleButton1.setText("Add Dataset");
+        jToggleButton1.setText("Evaluate Email");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         btnSpamFilter.setText("Spam Filter");
         btnSpamFilter.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +77,7 @@ public class Home extends javax.swing.JFrame {
         desktoPane.setLayout(desktoPaneLayout);
         desktoPaneLayout.setHorizontalGroup(
             desktoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1372, Short.MAX_VALUE)
+            .addGap(0, 1407, Short.MAX_VALUE)
         );
         desktoPaneLayout.setVerticalGroup(
             desktoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,8 +99,8 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(desktoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(desktoPane)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,6 +128,16 @@ public class Home extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnSpamFilterActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+         EmailEvaluation emailEvaluation = new EmailEvaluation();
+        
+        desktoPane.add(emailEvaluation);
+        
+        emailEvaluation.setVisible(true);
+        
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments

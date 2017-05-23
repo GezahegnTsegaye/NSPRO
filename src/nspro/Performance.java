@@ -31,6 +31,10 @@ public class Performance {
         this.recall = recall;
     }
 
+    /**
+     * this methods calculate the precision and recall values
+     * @return 
+     */
     public double getF1Score() {
         return 2 * (precision * recall) / (precision + recall);
     }

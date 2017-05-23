@@ -56,8 +56,9 @@ public class BayesSpamFilter {
     }
 
     public double isSpamProbability(String content) {
+        //the map will contain all the words that were found in the message with their frequencies. 
         String[] words = content.split("\\s+");
-
+         //String[] words1 = content.split("\\s+");
         double result = 1d;
 
         for (String word : words) {
@@ -109,5 +110,6 @@ public class BayesSpamFilter {
         normalize(spam, spamFeedings);
         normalize(ham, hamFeedings);
     }
+    
 
 }

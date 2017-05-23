@@ -27,6 +27,8 @@ public class SpamFilter extends javax.swing.JInternalFrame {
     String[] spamTest;
     String[] hamTest;
 
+    String mailMessages;
+
     /**
      * Creates new form SpamFilter
      */
@@ -51,12 +53,12 @@ public class SpamFilter extends javax.swing.JInternalFrame {
         btnSpamTrain = new javax.swing.JButton();
         btnSpamTest = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        txtSpamdatasetTrain = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtSpamDatasetValid = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
         txtSpamDatasetTest = new javax.swing.JList<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jlSpamTrainingDataset = new javax.swing.JList<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -76,6 +78,7 @@ public class SpamFilter extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         txtEmailStatus = new javax.swing.JTextField();
         txtSpamProbability = new javax.swing.JTextField();
+        lbStatus = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         txtPrecision = new javax.swing.JTextField();
@@ -86,6 +89,14 @@ public class SpamFilter extends javax.swing.JInternalFrame {
         txtBestThreshold = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        txtMailMessages = new javax.swing.JEditorPane();
+        btnAddMessages = new javax.swing.JButton();
+
+        fileChooser.setApproveButtonText("");
+        fileChooser.setAutoscrolls(true);
+        fileChooser.setMultiSelectionEnabled(true);
 
         setClosable(true);
         setIconifiable(true);
@@ -94,9 +105,9 @@ public class SpamFilter extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Loading Email Training Data"));
 
-        jLabel1.setText("Spam dataset Train");
+        jLabel1.setText("Spam-Train");
 
-        jLabel2.setText("Spam dataset validation");
+        jLabel2.setText("Spam-Validation");
 
         btnSpamValid.setText("Browse Spam Val");
         btnSpamValid.addActionListener(new java.awt.event.ActionListener() {
@@ -119,13 +130,13 @@ public class SpamFilter extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Spam dataset Test");
-
-        jScrollPane7.setViewportView(txtSpamdatasetTrain);
+        jLabel3.setText("Spam-Test");
 
         jScrollPane3.setViewportView(txtSpamDatasetValid);
 
         jScrollPane5.setViewportView(txtSpamDatasetTest);
+
+        jScrollPane6.setViewportView(jlSpamTrainingDataset);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,11 +157,9 @@ public class SpamFilter extends javax.swing.JInternalFrame {
                         .addComponent(btnSpamTrain))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
                         .addComponent(btnSpamValid))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane6))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -160,7 +169,7 @@ public class SpamFilter extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(btnSpamTrain))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -178,11 +187,11 @@ public class SpamFilter extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Email Performance"));
 
-        jLabel8.setText("Ham dataset Train");
+        jLabel8.setText("Ham-Train");
 
-        jLabel11.setText("Ham dataset Validation");
+        jLabel11.setText("Ham-Validation");
 
-        jLabel12.setText("Ham dataset Test");
+        jLabel12.setText("Ham-Test");
 
         btnHamTrain.setText("Browse Ham Train");
         btnHamTrain.addActionListener(new java.awt.event.ActionListener() {
@@ -274,13 +283,16 @@ public class SpamFilter extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtEmailStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(txtSpamProbability))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(lbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmailStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addComponent(txtSpamProbability))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +305,9 @@ public class SpamFilter extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtEmailStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -365,6 +379,17 @@ public class SpamFilter extends javax.swing.JInternalFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        jLabel4.setText("E-mail messages");
+
+        jScrollPane7.setViewportView(txtMailMessages);
+
+        btnAddMessages.setText("Add Messages");
+        btnAddMessages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMessagesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -375,19 +400,27 @@ public class SpamFilter extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                                .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(427, 427, 427))
+                                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAddMessages)))
+                        .addGap(0, 192, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,10 +433,17 @@ public class SpamFilter extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(btnAddMessages))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel4))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -413,6 +453,7 @@ public class SpamFilter extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here
         int returnVal = fileChooser.showOpenDialog(this);
+        fileChooser.setMultiSelectionEnabled(true);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] files = fileChooser.getSelectedFiles();
             String[] contents = new String[files.length];
@@ -434,8 +475,6 @@ public class SpamFilter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSpamValidActionPerformed
 
     private void btnSpamTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpamTrainActionPerformed
-        // TODO add your handling code here
-
         int returnVal = fileChooser.showOpenDialog(this);
         fileChooser.setMultiSelectionEnabled(true);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -443,36 +482,26 @@ public class SpamFilter extends javax.swing.JInternalFrame {
             File[] files = fileChooser.getSelectedFiles();
             String[] listData = new String[files.length];
             try {
-
-                //                for (File sourceFile : files) {
-                //                    System.out.println(sourceFile.getAbsolutePath());
-                //                    jList1.setListData(sourceFile.list());
-                //
-                //                }
                 for (int i = 0; i < files.length; i++) {
                     byte[] data = Files.readAllBytes(Paths.get(files[i].toURI()));
                     listData[i] = new String(data, Charset.defaultCharset());
-
-                    txtSpamdatasetTrain.setListData(listData);
+                    jlSpamTrainingDataset.setListData(listData);
                 }
-                System.out.println("the length of file: " + listData.length);
                 // What to do with the file, e.g. display it in a TextArea
-                spamTrain = listData;
 
-                System.out.println("contents = " + listData.length);
+                spamTrain = listData;
             } catch (IOException ex) {
-                System.out.println("problem accessing file" + listData.length);
-                ex.printStackTrace();
+                System.out.println("the length of file" + listData.length);
             }
         } else {
             System.out.println("File access cancelled by user.");
         }
 
+
     }//GEN-LAST:event_btnSpamTrainActionPerformed
 
     private void btnSpamTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpamTestActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here
+
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] files = fileChooser.getSelectedFiles();
@@ -498,10 +527,7 @@ public class SpamFilter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSpamTestActionPerformed
 
     private void btnHamTrainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamTrainActionPerformed
-        // TODO add your handling code here:
 
-        // TODO add your handling code here:
-        // TODO add your handling code here
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] files = fileChooser.getSelectedFiles();
@@ -546,12 +572,10 @@ public class SpamFilter extends javax.swing.JInternalFrame {
             }
         } else {
             System.out.println("File access cancelled by user.");
-        }        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_btnHamValActionPerformed
 
     private void btnHamTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamTestActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here
         int returnVal = fileChooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File[] file = fileChooser.getSelectedFiles();
@@ -569,14 +593,22 @@ public class SpamFilter extends javax.swing.JInternalFrame {
             }
         } else {
             System.out.println("File access cancelled by user.");
-        }        // TODO add your handling code here:
+        }
     }//GEN-LAST:event_btnHamTestActionPerformed
-
+    public void clearText() {
+        txtBestThreshold.setText("");
+        txtPrecision.setText("");
+        txtRecall.setText("");
+        txtScore.setText("");
+        txtSpamProbability.setText("");
+        txtEmailStatus.setText("");
+        lbStatus.setText("");
+    }
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
 
         try {
             String filename = "test"; //gezu don't forget to add english dictionary words
-
+            clearText();
             System.out.println("Load training Data...");
 
             BayesSpamFilter spamfilter = new BayesSpamFilter(spamTrain, hamTrain);
@@ -598,22 +630,46 @@ public class SpamFilter extends javax.swing.JInternalFrame {
 
             System.out.println("\nCheck your Mail...");
 
-            String content = new String(Files.readAllBytes(Paths.get(filename)));
+            String content = new String(Files.readAllBytes(Paths.get(mailMessages)));
 
-            System.out.println("Spam probability: " + spamfilter.isSpamProbability(content));
-
+            System.out.println("Spam probability: " + spamfilter.isSpamProbability(mailMessages));
+            txtSpamProbability.setText(Double.toString(spamfilter.isSpamProbability(mailMessages)));
             if (spamfilter.isSpam(content)) {
                 System.out.println("This mail is probably spam!");
+                lbStatus.setText("This Mail is probably spam!..");
             } else {
                 System.out.println("This mail looks fine...");
+                txtEmailStatus.setText("This mail looks fine..............");
             }
         } catch (IOException ex) {
             Logger.getLogger(SpamFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRunActionPerformed
 
+    private void btnAddMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMessagesActionPerformed
+        int returnVal = fileChooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File[] file = fileChooser.getSelectedFiles();
+            String[] contents = new String[file.length];
+            try {
+                for (int i = 0; i < file.length; i++) {
+                    byte[] data = Files.readAllBytes(Paths.get(file[i].toURI()));
+                    contents[i] = new String(data, Charset.defaultCharset());
+                    txtMailMessages.setText(contents[i]);
+                }
+                // What to do with the file, e.g. display it in a TextArea
+                mailMessages = contents.toString();
+            } catch (IOException ex) {
+                System.out.println("problem accessing file" + contents.length);
+            }
+        } else {
+            System.out.println("File access cancelled by user.");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddMessagesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddMessages;
     private javax.swing.JButton btnHamTest;
     private javax.swing.JButton btnHamTrain;
     private javax.swing.JButton btnHamVal;
@@ -633,6 +689,7 @@ public class SpamFilter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -644,18 +701,21 @@ public class SpamFilter extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JList<String> jlSpamTrainingDataset;
+    private javax.swing.JLabel lbStatus;
     private javax.swing.JTextField txtBestThreshold;
     private javax.swing.JTextField txtEmailStatus;
     private javax.swing.JList<String> txtHamDatasetTest;
     private javax.swing.JList<String> txtHamdatasetTrain;
     private javax.swing.JList<String> txtHamdatasetValid;
+    private javax.swing.JEditorPane txtMailMessages;
     private javax.swing.JTextField txtPrecision;
     private javax.swing.JTextField txtRecall;
     private javax.swing.JTextField txtScore;
     private javax.swing.JList<String> txtSpamDatasetTest;
     private javax.swing.JList<String> txtSpamDatasetValid;
     private javax.swing.JTextField txtSpamProbability;
-    private javax.swing.JList<String> txtSpamdatasetTrain;
     // End of variables declaration//GEN-END:variables
 }
