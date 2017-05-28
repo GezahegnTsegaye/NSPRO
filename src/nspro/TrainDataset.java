@@ -40,7 +40,14 @@ public class TrainDataset {
 
     
     
-    
+    /**
+     * Calculate the false postive and true postive, false negative labellings on 
+     * a category, by summing the appropriate column
+     * @param spam
+     * @param ham
+     * @param spamThreshold
+     * @return 
+     */
     public Performance performanceCalc(String[] spam, String[] ham, double spamThreshold) {
         double prevThreshold = bayesSpamFilter.getSpamThreshhold();
         bayesSpamFilter.setSpamThreshhold(spamThreshold);  
@@ -90,7 +97,7 @@ public class TrainDataset {
         
         getBayesSpamFilter().setSpamThreshhold(bestThreshold);
         
-        return performanceCalc(testHam, testHam, bestThreshold);
+        return performanceCalc(testSpam, testHam, bestThreshold);
     }
     
     

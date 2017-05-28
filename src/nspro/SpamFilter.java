@@ -607,7 +607,6 @@ public class SpamFilter extends javax.swing.JInternalFrame {
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
 
         try {
-            String filename = "test"; //gezu don't forget to add english dictionary words
             clearText();
             System.out.println("Load training Data...");
 
@@ -630,18 +629,18 @@ public class SpamFilter extends javax.swing.JInternalFrame {
 
             System.out.println("\nCheck your Mail...");
 
-            String content = new String(Files.readAllBytes(Paths.get(mailMessages)));
+            //String content = new String(Files.readAllBytes(Paths.get(mailMessages)));
 
             System.out.println("Spam probability: " + spamfilter.isSpamProbability(mailMessages));
             txtSpamProbability.setText(Double.toString(spamfilter.isSpamProbability(mailMessages)));
-            if (spamfilter.isSpam(content)) {
+            if (spamfilter.isSpam(mailMessages)) {
                 System.out.println("This mail is probably spam!");
                 lbStatus.setText("This Mail is probably spam!..");
             } else {
                 System.out.println("This mail looks fine...");
                 txtEmailStatus.setText("This mail looks fine..............");
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(SpamFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRunActionPerformed
