@@ -1,3 +1,5 @@
-# NSPRO
+# Network Security Project (NSPRO)
 
-Simple project using Bayes algorithm for Spam filtering
+Simulating network security for sample filtering on different organization
+
+The project uses java using swing interface development and Bayes algorithm for Spam filtering
